@@ -1,0 +1,109 @@
+<div class="login-container">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg border-0">
+              <div class="card-body p-5">
+                <!-- Header -->
+                <div class="text-center mb-4">
+                  <div class="login-icon mb-3">
+                    <i class="bi bi-truck text-primary" style="font-size: 3rem;"></i>
+                  </div>
+                  <h2 class="card-title text-primary fw-bold">تسجيل الدخول</h2>
+                  <p class="text-muted">نظام إدارة الأسطول</p>
+                </div>
+
+                <!-- Login Form -->
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                  <!-- Username Field -->
+                  <div class="mb-3">
+                    <label for="username" class="form-label fw-semibold">
+                      <i class="bi bi-person me-1"></i>
+                      اسم المستخدم
+                    </label>
+                    <input
+                      type="text"
+                      id="username"
+                      class="form-control"
+                      [class.is-invalid]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+                      formControlName="username"
+                      placeholder="أدخل اسم المستخدم"
+                      autocomplete="username">
+                    <div class="invalid-feedback" *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+                      <small *ngIf="loginForm.get('username')?.errors?.['required']">
+                        اسم المستخدم مطلوب
+                      </small>
+                      <small *ngIf="loginForm.get('username')?.errors?.['minlength']">
+                        اسم المستخدم يجب أن يكون 3 أحرف على الأقل
+                      </small>
+                    </div>
+                  </div>
+
+                  <!-- Password Field -->
+                  <div class="mb-4">
+                    <label for="password" class="form-label fw-semibold">
+                      <i class="bi bi-lock me-1"></i>
+                      كلمة المرور
+                    </label>
+                    <div class="input-group">
+                      <input
+                        [type]="showPassword ? 'text' : 'password'"
+                        id="password"
+                        class="form-control"
+                        [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                        formControlName="password"
+                        placeholder="أدخل كلمة المرور"
+                        autocomplete="current-password">
+                      <button
+                        type="button"
+                        class="btn btn-outline-secondary"
+                        (click)="togglePassword()">
+                        <i class="bi" [class.bi-eye]="!showPassword" [class.bi-eye-slash]="showPassword"></i>
+                      </button>
+                    </div>
+                    <div class="invalid-feedback" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                      <small *ngIf="loginForm.get('password')?.errors?.['required']">
+                        كلمة المرور مطلوبة
+                      </small>
+                      <small *ngIf="loginForm.get('password')?.errors?.['minlength']">
+                        كلمة المرور يجب أن تكون 6 أحرف على الأقل
+                      </small>
+                    </div>
+                  </div>
+
+                  <!-- Error Alert -->
+                  <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="errorMessage">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    <div>{{ errorMessage }}</div>
+                  </div>
+
+                  <!-- Submit Button -->
+                  <div class="d-grid">
+                    <button
+                      type="submit"
+                      class="btn btn-primary btn-lg"
+                      [disabled]="loginForm.invalid || isLoading">
+                      <span *ngIf="!isLoading">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>
+                        تسجيل الدخول
+                      </span>
+                      <span *ngIf="isLoading">
+                        <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                        جارٍ تسجيل الدخول...
+                      </span>
+                    </button>
+                  </div>
+                </form>
+
+                <!-- Footer -->
+                <div class="text-center mt-4">
+                  <small class="text-muted">
+                    © 2024 نظام إدارة الأسطول. جميع الحقوق محفوظة.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

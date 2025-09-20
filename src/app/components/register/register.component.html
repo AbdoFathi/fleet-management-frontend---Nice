@@ -1,0 +1,247 @@
+ <div class="container-fluid min-vh-100 py-4">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-6">
+          <div class="card shadow-lg border-0">
+            <div class="card-body p-5">
+              <div class="text-center mb-4">
+                <h2 class="card-title fw-bold text-primary mb-2">إنشاء حساب جديد</h2>
+                <p class="text-muted">انضم إلى نظام إدارة الأسطول</p>
+              </div>
+
+              <!-- Alert Messages -->
+              @if (errorMessage()) {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <i class="fas fa-exclamation-triangle me-2"></i>
+                  {{ errorMessage() }}
+                  <button type="button" class="btn-close" (click)="errorMessage.set('')"></button>
+                </div>
+              }
+
+              @if (successMessage()) {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <i class="fas fa-check-circle me-2"></i>
+                  {{ successMessage() }}
+                  <button type="button" class="btn-close" (click)="successMessage.set('')"></button>
+                </div>
+              }
+
+              <!-- Registration Form -->
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <!-- Username -->
+                  <div class="col-md-6 mb-3">
+                    <label for="username" class="form-label">
+                      <i class="fas fa-user me-2"></i>اسم المستخدم <span class="text-danger">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="username"
+                      class="form-control"
+                      [class.is-invalid]="isFieldInvalid('username')"
+                      formControlName="username"
+                      placeholder="أدخل اسم المستخدم">
+                    @if (isFieldInvalid('username')) {
+                      <div class="invalid-feedback">
+                        @if (registerForm.get('username')?.errors?.['required']) {
+                          اسم المستخدم مطلوب
+                        }
+                        @if (registerForm.get('username')?.errors?.['minlength']) {
+                          يجب أن يكون اسم المستخدم 3 أحرف على الأقل
+                        }
+                      </div>
+                    }
+                  </div>
+
+                  <!-- Email -->
+                  <div class="col-md-6 mb-3">
+                    <label for="email" class="form-label">
+                      <i class="fas fa-envelope me-2"></i>البريد الإلكتروني <span class="text-danger">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      class="form-control"
+                      [class.is-invalid]="isFieldInvalid('email')"
+                      formControlName="email"
+                      placeholder="example@domain.com">
+                    @if (isFieldInvalid('email')) {
+                      <div class="invalid-feedback">
+                        @if (registerForm.get('email')?.errors?.['required']) {
+                          البريد الإلكتروني مطلوب
+                        }
+                        @if (registerForm.get('email')?.errors?.['email']) {
+                          يرجى إدخال بريد إلكتروني صحيح
+                        }
+                      </div>
+                    }
+                  </div>
+                </div>
+
+                <div class="row">
+                  <!-- Password -->
+                  <div class="col-md-6 mb-3">
+                    <label for="password" class="form-label">
+                      <i class="fas fa-lock me-2"></i>كلمة المرور <span class="text-danger">*</span>
+                    </label>
+                    <div class="input-group">
+                      <input
+                        [type]="showPassword() ? 'text' : 'password'"
+                        id="password"
+                        class="form-control"
+                        [class.is-invalid]="isFieldInvalid('password')"
+                        formControlName="password"
+                        placeholder="أدخل كلمة المرور">
+                      <button
+                        type="button"
+                        class="btn btn-outline-secondary"
+                        (click)="togglePassword()">
+                        <i [class]="showPassword() ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                      </button>
+                    </div>
+                    @if (isFieldInvalid('password')) {
+                      <div class="invalid-feedback d-block">
+                        @if (registerForm.get('password')?.errors?.['required']) {
+                          كلمة المرور مطلوبة
+                        }
+                        @if (registerForm.get('password')?.errors?.['minlength']) {
+                          يجب أن تكون كلمة المرور 8 أحرف على الأقل
+                        }
+                        @if (registerForm.get('password')?.errors?.['pattern']) {
+                          يجب أن تحتوي على حرف كبير وصغير ورقم ورمز خاص
+                        }
+                      </div>
+                    }
+                  </div>
+
+                  <!-- Confirm Password -->
+                  <div class="col-md-6 mb-3">
+                    <label for="confirmPassword" class="form-label">
+                      <i class="fas fa-lock me-2"></i>تأكيد كلمة المرور <span class="text-danger">*</span>
+                    </label>
+                    <div class="input-group">
+                      <input
+                        [type]="showConfirmPassword() ? 'text' : 'password'"
+                        id="confirmPassword"
+                        class="form-control"
+                        [class.is-invalid]="isFieldInvalid('confirmPassword')"
+                        formControlName="confirmPassword"
+                        placeholder="أعد إدخال كلمة المرور">
+                      <button
+                        type="button"
+                        class="btn btn-outline-secondary"
+                        (click)="toggleConfirmPassword()">
+                        <i [class]="showConfirmPassword() ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                      </button>
+                    </div>
+                    @if (isFieldInvalid('confirmPassword')) {
+                      <div class="invalid-feedback d-block">
+                        @if (registerForm.get('confirmPassword')?.errors?.['required']) {
+                          تأكيد كلمة المرور مطلوب
+                        }
+                        @if (registerForm.get('confirmPassword')?.errors?.['passwordMismatch']) {
+                          كلمتا المرور غير متطابقتين
+                        }
+                      </div>
+                    }
+                  </div>
+                </div>
+
+                <div class="row">
+                  <!-- Phone Number -->
+                  <div class="col-md-6 mb-3">
+                    <label for="phoneNumber" class="form-label">
+                      <i class="fas fa-phone me-2"></i>رقم الهاتف
+                    </label>
+                    <input
+                      type="tel"
+                      id="phoneNumber"
+                      class="form-control"
+                      [class.is-invalid]="isFieldInvalid('phoneNumber')"
+                      formControlName="phoneNumber"
+                      placeholder="+966 5xx xxx xxx">
+                    @if (isFieldInvalid('phoneNumber')) {
+                      <div class="invalid-feedback">
+                        @if (registerForm.get('phoneNumber')?.errors?.['pattern']) {
+                          يرجى إدخال رقم هاتف صحيح
+                        }
+                      </div>
+                    }
+                  </div>
+
+                  <!-- Role Selection -->
+                  <div class="col-md-6 mb-3">
+                    <label for="role" class="form-label">
+                      <i class="fas fa-user-tag me-2"></i>نوع الحساب
+                    </label>
+                    <select
+                      id="role"
+                      class="form-select"
+                      formControlName="role">
+                      <option value="USER">مستخدم عادي</option>
+                      <option value="DRIVER">سائق</option>
+                      <option value="MANAGER">مدير</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Address -->
+                <div class="mb-4">
+                  <label for="address" class="form-label">
+                    <i class="fas fa-map-marker-alt me-2"></i>العنوان
+                  </label>
+                  <textarea
+                    id="address"
+                    class="form-control"
+                    formControlName="address"
+                    rows="3"
+                    placeholder="أدخل العنوان الكامل"></textarea>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="mb-3 form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="acceptTerms"
+                    formControlName="acceptTerms"
+                    [class.is-invalid]="isFieldInvalid('acceptTerms')">
+                  <label class="form-check-label" for="acceptTerms">
+                    أوافق على <a href="#" class="text-primary">الشروط والأحكام</a> و
+                    <a href="#" class="text-primary">سياسة الخصوصية</a>
+                    <span class="text-danger">*</span>
+                  </label>
+                  @if (isFieldInvalid('acceptTerms')) {
+                    <div class="invalid-feedback d-block">
+                      يجب الموافقة على الشروط والأحكام
+                    </div>
+                  }
+                </div>
+
+                <!-- Submit Button -->
+                <button
+                  type="submit"
+                  class="btn btn-primary w-100 py-2 mb-3"
+                  [disabled]="registerForm.invalid || authService.isLoading()">
+                  @if (authService.isLoading()) {
+                    <span class="spinner-border spinner-border-sm me-2"></span>
+                    جاري إنشاء الحساب...
+                  } @else {
+                    <i class="fas fa-user-plus me-2"></i>
+                    إنشاء الحساب
+                  }
+                </button>
+
+                <!-- Login Link -->
+                <div class="text-center">
+                  <p class="mb-0">لديك حساب بالفعل؟ 
+                    <a routerLink="/login" class="text-primary text-decoration-none fw-bold">
+                      تسجيل الدخول
+                    </a>
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

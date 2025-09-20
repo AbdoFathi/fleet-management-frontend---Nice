@@ -1,0 +1,31 @@
+.navbar-brand {
+      font-size: 1.5rem;
+    }
+    
+    .nav-link {
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      transform: translateY(-1px);
+    }
+    
+    .dropdown-item {
+      transition: all 0.2s ease;
+    }
+    
+    .dropdown-item:hover {
+      background-color: var(--bs-primary);
+      color: white;
+    }
+    
+    .dropdown-item.text-danger:hover {
+      background-color: var(--bs-danger);
+      color: white;
+    }
+    
+    @media (max-width: 991.98px) {
+      .navbar-nav {
+        text-align: center;
+      }
+    }

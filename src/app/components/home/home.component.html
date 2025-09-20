@@ -1,0 +1,205 @@
+ <div class="home-container">
+      <div class="container py-5">
+        <!-- Welcome Section -->
+        <div class="row mb-5">
+          <div class="col-12">
+            <div class="welcome-card card border-0 shadow-sm">
+              <div class="card-body p-4">
+                <div class="d-flex align-items-center">
+                  <div class="welcome-icon me-3">
+                    <i class="bi bi-house-heart text-primary" style="font-size: 2.5rem;"></i>
+                  </div>
+                  <div>
+                    <h2 class="mb-1 text-primary">مرحباً بك، {{ currentUser?.username }}!</h2>
+                    <p class="mb-0 text-muted">{{ getGreetingMessage() }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="row g-4 mb-5">
+          <div class="col-md-3 col-sm-6">
+            <div class="stat-card card border-0 shadow-sm h-100">
+              <div class="card-body text-center p-4">
+                <div class="stat-icon mb-3">
+                  <i class="bi bi-truck text-success" style="font-size: 2rem;"></i>
+                </div>
+                <h4 class="text-success">156</h4>
+                <p class="mb-0 text-muted small">إجمالي المركبات</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-3 col-sm-6">
+            <div class="stat-card card border-0 shadow-sm h-100">
+              <div class="card-body text-center p-4">
+                <div class="stat-icon mb-3">
+                  <i class="bi bi-check-circle text-primary" style="font-size: 2rem;"></i>
+                </div>
+                <h4 class="text-primary">142</h4>
+                <p class="mb-0 text-muted small">مركبات نشطة</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-3 col-sm-6">
+            <div class="stat-card card border-0 shadow-sm h-100">
+              <div class="card-body text-center p-4">
+                <div class="stat-icon mb-3">
+                  <i class="bi bi-exclamation-triangle text-warning" style="font-size: 2rem;"></i>
+                </div>
+                <h4 class="text-warning">8</h4>
+                <p class="mb-0 text-muted small">تحتاج صيانة</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-3 col-sm-6">
+            <div class="stat-card card border-0 shadow-sm h-100">
+              <div class="card-body text-center p-4">
+                <div class="stat-icon mb-3">
+                  <i class="bi bi-x-circle text-danger" style="font-size: 2rem;"></i>
+                </div>
+                <h4 class="text-danger">6</h4>
+                <p class="mb-0 text-muted small">خارج الخدمة</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="row mb-5">
+          <div class="col-12">
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-white border-bottom-0 pb-0">
+                <h5 class="card-title mb-3">
+                  <i class="bi bi-lightning-charge text-primary me-2"></i>
+                  إجراءات سريعة
+                </h5>
+              </div>
+              <div class="card-body">
+                <div class="row g-3">
+                  <div class="col-md-3 col-sm-6">
+                    <button class="btn btn-outline-primary w-100 p-3">
+                      <i class="bi bi-plus-lg d-block mb-2" style="font-size: 1.5rem;"></i>
+                      إضافة مركبة جديدة
+                    </button>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                    <button class="btn btn-outline-success w-100 p-3">
+                      <i class="bi bi-calendar-check d-block mb-2" style="font-size: 1.5rem;"></i>
+                      جدولة صيانة
+                    </button>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                    <button class="btn btn-outline-info w-100 p-3">
+                      <i class="bi bi-geo-alt d-block mb-2" style="font-size: 1.5rem;"></i>
+                      تتبع المركبات
+                    </button>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                    <button class="btn btn-outline-warning w-100 p-3">
+                      <i class="bi bi-file-earmark-text d-block mb-2" style="font-size: 1.5rem;"></i>
+                      التقارير
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-white border-bottom-0 pb-0">
+                <h5 class="card-title mb-3">
+                  <i class="bi bi-clock-history text-primary me-2"></i>
+                  النشاط الأخير
+                </h5>
+              </div>
+              <div class="card-body">
+                <div class="activity-list">
+                  <div class="activity-item d-flex align-items-center mb-3 p-3 bg-light rounded">
+                    <div class="activity-icon me-3">
+                      <i class="bi bi-check-circle-fill text-success"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                      <h6 class="mb-1">تم إكمال صيانة المركبة ABC-123</h6>
+                      <small class="text-muted">منذ 2 ساعة</small>
+                    </div>
+                  </div>
+                  
+                  <div class="activity-item d-flex align-items-center mb-3 p-3 bg-light rounded">
+                    <div class="activity-icon me-3">
+                      <i class="bi bi-plus-circle-fill text-primary"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                      <h6 class="mb-1">إضافة مركبة جديدة XYZ-789</h6>
+                      <small class="text-muted">منذ 4 ساعات</small>
+                    </div>
+                  </div>
+                  
+                  <div class="activity-item d-flex align-items-center mb-3 p-3 bg-light rounded">
+                    <div class="activity-icon me-3">
+                      <i class="bi bi-exclamation-triangle-fill text-warning"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                      <h6 class="mb-1">تنبيه صيانة للمركبة DEF-456</h6>
+                      <small class="text-muted">منذ يوم</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-4">
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-white border-bottom-0 pb-0">
+                <h5 class="card-title mb-3">
+                  <i class="bi bi-person-circle text-primary me-2"></i>
+                  معلومات المستخدم
+                </h5>
+              </div>
+              <div class="card-body">
+                <div class="user-info" *ngIf="currentUser">
+                  <div class="text-center mb-3">
+                    <div class="user-avatar">
+                      <i class="bi bi-person-circle text-primary" style="font-size: 4rem;"></i>
+                    </div>
+                  </div>
+                  
+                  <div class="info-item mb-3">
+                    <label class="form-label small text-muted">الاسم:</label>
+                    <div class="fw-semibold">{{ currentUser.username }}</div>
+                  </div>
+                  
+                  <div class="info-item mb-3">
+                    <label class="form-label small text-muted">البريد الإلكتروني:</label>
+                    <div class="fw-semibold">{{ currentUser.email }}</div>
+                  </div>
+                  
+                  <div class="info-item mb-3" *ngIf="currentUser.phoneNumber">
+                    <label class="form-label small text-muted">رقم الهاتف:</label>
+                    <div class="fw-semibold">{{ currentUser.phoneNumber }}</div>
+                  </div>
+                  
+                  <div class="info-item mb-3">
+                    <label class="form-label small text-muted">الأدوار:</label>
+                    <div>
+                      <span *ngFor="let role of currentUser.roles" 
+                            class="badge bg-primary me-1">{{ role }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,226 @@
+ <div class="profile-container">
+      <div class="container py-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <!-- Profile Header -->
+            <div class="card border-0 shadow-sm mb-4">
+              <div class="card-body p-4">
+                <div class="d-flex align-items-center">
+                  <div class="profile-avatar me-4">
+                    <i class="bi bi-person-circle text-primary" style="font-size: 4rem;"></i>
+                  </div>
+                  <div>
+                    <h3 class="mb-1 text-primary">{{ currentUser?.username }}</h3>
+                    <p class="mb-0 text-muted">{{ currentUser?.email }}</p>
+                    <div class="mt-2">
+                      <span *ngFor="let role of currentUser?.roles" 
+                            class="badge bg-primary me-1">{{ role }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile Information -->
+            <div class="card border-0 shadow-sm mb-4">
+              <div class="card-header bg-white border-bottom-0 pb-0">
+                <h5 class="card-title mb-3">
+                  <i class="bi bi-person-gear text-primary me-2"></i>
+                  معلومات الملف الشخصي
+                </h5>
+              </div>
+              <div class="card-body">
+                <form [formGroup]="profileForm" (ngSubmit)="onUpdateProfile()">
+                  <div class="row">
+                    <!-- Username -->
+                    <div class="col-md-6 mb-3">
+                      <label for="username" class="form-label fw-semibold">
+                        <i class="bi bi-person me-1"></i>
+                        اسم المستخدم
+                      </label>
+                      <input
+                        type="text"
+                        id="username"
+                        class="form-control"
+                        formControlName="username"
+                        readonly>
+                      <small class="form-text text-muted">لا يمكن تغيير اسم المستخدم</small>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="col-md-6 mb-3">
+                      <label for="email" class="form-label fw-semibold">
+                        <i class="bi bi-envelope me-1"></i>
+                        البريد الإلكتروني
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        class="form-control"
+                        [class.is-invalid]="profileForm.get('email')?.invalid && profileForm.get('email')?.touched"
+                        formControlName="email">
+                      <div class="invalid-feedback" *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+                        يرجى إدخال بريد إلكتروني صحيح
+                      </div>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="col-md-6 mb-3">
+                      <label for="phoneNumber" class="form-label fw-semibold">
+                        <i class="bi bi-telephone me-1"></i>
+                        رقم الهاتف
+                      </label>
+                      <input
+                        type="tel"
+                        id="phoneNumber"
+                        class="form-control"
+                        formControlName="phoneNumber"
+                        placeholder="05xxxxxxxx">
+                    </div>
+
+                    <!-- Address -->
+                    <div class="col-md-6 mb-3">
+                      <label for="address" class="form-label fw-semibold">
+                        <i class="bi bi-geo-alt me-1"></i>
+                        العنوان
+                      </label>
+                      <input
+                        type="text"
+                        id="address"
+                        class="form-control"
+                        formControlName="address"
+                        placeholder="الرياض، المملكة العربية السعودية">
+                    </div>
+                  </div>
+
+                  <!-- Update Button -->
+                  <div class="text-end mt-4">
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      [disabled]="profileForm.invalid || isUpdatingProfile">
+                      <span *ngIf="!isUpdatingProfile">
+                        <i class="bi bi-check-lg me-1"></i>
+                        تحديث المعلومات
+                      </span>
+                      <span *ngIf="isUpdatingProfile">
+                        <span class="spinner-border spinner-border-sm me-1"></span>
+                        جارٍ التحديث...
+                      </span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Security Settings -->
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-white border-bottom-0 pb-0">
+                <h5 class="card-title mb-3">
+                  <i class="bi bi-shield-lock text-primary me-2"></i>
+                  إعدادات الأمان
+                </h5>
+              </div>
+              <div class="card-body">
+                <!-- Change Password Form -->
+                <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()">
+                  <div class="row">
+                    <!-- Current Password -->
+                    <div class="col-md-12 mb-3">
+                      <label for="currentPassword" class="form-label fw-semibold">
+                        <i class="bi bi-lock me-1"></i>
+                        كلمة المرور الحالية
+                      </label>
+                      <input
+                        type="password"
+                        id="currentPassword"
+                        class="form-control"
+                        [class.is-invalid]="passwordForm.get('currentPassword')?.invalid && passwordForm.get('currentPassword')?.touched"
+                        formControlName="currentPassword">
+                      <div class="invalid-feedback" *ngIf="passwordForm.get('currentPassword')?.invalid && passwordForm.get('currentPassword')?.touched">
+                        كلمة المرور الحالية مطلوبة
+                      </div>
+                    </div>
+
+                    <!-- New Password -->
+                    <div class="col-md-6 mb-3">
+                      <label for="newPassword" class="form-label fw-semibold">
+                        <i class="bi bi-key me-1"></i>
+                        كلمة المرور الجديدة
+                      </label>
+                      <input
+                        type="password"
+                        id="newPassword"
+                        class="form-control"
+                        [class.is-invalid]="passwordForm.get('newPassword')?.invalid && passwordForm.get('newPassword')?.touched"
+                        formControlName="newPassword">
+                      <div class="invalid-feedback" *ngIf="passwordForm.get('newPassword')?.invalid && passwordForm.get('newPassword')?.touched">
+                        كلمة المرور يجب أن تكون 6 أحرف على الأقل
+                      </div>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="col-md-6 mb-3">
+                      <label for="confirmPassword" class="form-label fw-semibold">
+                        <i class="bi bi-check2-square me-1"></i>
+                        تأكيد كلمة المرور
+                      </label>
+                      <input
+                        type="password"
+                        id="confirmPassword"
+                        class="form-control"
+                        [class.is-invalid]="passwordForm.get('confirmPassword')?.invalid && passwordForm.get('confirmPassword')?.touched"
+                        formControlName="confirmPassword">
+                      <div class="invalid-feedback" *ngIf="passwordForm.get('confirmPassword')?.invalid && passwordForm.get('confirmPassword')?.touched">
+                        كلمة المرور غير متطابقة
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Change Password Button -->
+                  <div class="text-end mt-4">
+                    <button
+                      type="submit"
+                      class="btn btn-warning"
+                      [disabled]="passwordForm.invalid || isChangingPassword">
+                      <span *ngIf="!isChangingPassword">
+                        <i class="bi bi-key me-1"></i>
+                        تغيير كلمة المرور
+                      </span>
+                      <span *ngIf="isChangingPassword">
+                        <span class="spinner-border spinner-border-sm me-1"></span>
+                        جارٍ التغيير...
+                      </span>
+                    </button>
+                  </div>
+                </form>
+
+                <hr class="my-4">
+
+                <!-- Logout from all devices -->
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h6 class="mb-1">تسجيل الخروج من جميع الأجهزة</h6>
+                    <small class="text-muted">سيتم تسجيل خروجك من جميع الأجهزة الأخرى</small>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger"
+                    (click)="logoutFromAllDevices()"
+                    [disabled]="isLoggingOutAll">
+                    <span *ngIf="!isLoggingOutAll">
+                      <i class="bi bi-box-arrow-right me-1"></i>
+                      تسجيل الخروج من الكل
+                    </span>
+                    <span *ngIf="isLoggingOutAll">
+                      <span class="spinner-border spinner-border-sm me-1"></span>
+                      جارٍ...
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

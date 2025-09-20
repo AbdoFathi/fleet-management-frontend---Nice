@@ -1,0 +1,53 @@
+.profile-container {
+      min-height: calc(100vh - 60px);
+      background-color: #f8f9fa;
+    }
+
+    .profile-avatar {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .card {
+      border-radius: 1rem;
+    }
+
+    .form-control:focus {
+      border-color: var(--bs-primary);
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+    .btn {
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+    }
+
+    .form-control[readonly] {
+      background-color: #e9ecef;
+      cursor: not-allowed;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+    }
