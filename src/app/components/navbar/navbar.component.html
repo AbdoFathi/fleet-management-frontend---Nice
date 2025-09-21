@@ -27,11 +27,12 @@
 
           <ul class="navbar-nav">
             <li class="nav-item dropdown" *ngIf="isAuthenticated && currentUser">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" 
-                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-circle me-1"></i>
-                {{ currentUser.username }}
-              </a>
+             <button class="nav-link dropdown-toggle btn btn-link" type="button" id="navbarDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle me-1"></i>
+              {{ currentUser.username }}
+            </button>
+
               <ul class="dropdown-menu dropdown-menu-end">
                 <li><h6 class="dropdown-header">{{ currentUser.email }}</h6></li>
                 <li><hr class="dropdown-divider"></li>

@@ -1,0 +1,8 @@
+.app-container {
+      min-height: 100vh;
+      background-color: #f8f9fa;
+    }
+    
+    .main-content {
+      padding-top: 60px; /* Account for fixed navbar */
+    }
